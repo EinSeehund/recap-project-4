@@ -3,12 +3,12 @@ import Color from "./Components/Color/Color";
 import "./App.css";
 
 function App() {
-  return (
-    <>
-      <h1>Theme Creator</h1>
-      // display colors here
-    </>
-  );
+    return (
+        <>
+            <h1>Theme Creator</h1>
+            <p>display colors here</p>
+        </>
+    );
 }
 
 export default App;
