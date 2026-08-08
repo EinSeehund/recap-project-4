@@ -8,14 +8,11 @@ import { uid } from "uid";
 function App() {
     const [colors, setColors] = useState(initialColors);
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const newColor = Object.fromEntries(formData);
+    function handleAddColor(newColorData) {
         setColors([
             {
                 id: uid(),
-                ...newColor,
+                ...newColorData,
             },
             ...colors,
         ]);
@@ -24,7 +21,7 @@ function App() {
     return (
         <>
             <h1>Theme Creator</h1>
-            <ColorForm onSubmit={handleSubmit} />
+            <ColorForm onSubmit={handleAddColor} />
             {colors.map((color) => (
                 <Color
                     key={color.id}

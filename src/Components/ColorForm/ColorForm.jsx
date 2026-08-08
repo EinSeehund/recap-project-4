@@ -1,20 +1,17 @@
 import "./ColorForm.css";
-import { useState } from "react";
+import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({ onSubmit }) {
-    const [hex, setHex] = useState("#663399");
-    const [contrast, setContrast] = useState("#ffffff");
-
-    function handleChangeHex(event) {
-        setHex(event.target.value);
-    }
-
-    function handleChangeContrast(event) {
-        setContrast(event.target.value);
+    function handleSubmit(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const newColor = Object.fromEntries(formData);
+        onSubmit(newColor);
+        event.target.reset();
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
             <label htmlFor="role">Role</label>
             <input
                 type="text"
@@ -24,27 +21,13 @@ export default function ColorForm({ onSubmit }) {
             />
 
             <label htmlFor="hex">Hex</label>
-            <input
-                type="text"
-                name="hex"
-                id="hex"
-                value={hex}
-                onChange={handleChangeHex}
-            />
-            <input type="color" value={hex} onChange={handleChangeHex} />
+            <ColorInput id="hex" value="#663399" ariaLabel="Pick hex color" />
 
             <label htmlFor="contrastText">Contrast Text</label>
-            <input
-                type="text"
-                name="contrastText"
+            <ColorInput
                 id="contrastText"
-                value={contrast}
-                onChange={handleChangeContrast}
-            />
-            <input
-                type="color"
-                value={contrast}
-                onChange={handleChangeContrast}
+                value="#ffffff"
+                ariaLabel="Pick contrast color"
             />
 
             <button type="submit">ADD COLOR</button>
