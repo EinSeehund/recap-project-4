@@ -18,6 +18,10 @@ function App() {
         ]);
     }
 
+    function handleDeleteColor(colorId) {
+        setColors(colors.filter((color) => color.id !== colorId));
+    }
+
     return (
         <>
             <h1>Theme Creator</h1>
@@ -25,11 +29,14 @@ function App() {
             {colors.map((color) => (
                 <Color
                     key={color.id}
+                    id={color.id}
                     color={color.hex}
                     role={color.role}
                     contrastText={color.contrastText}
+                    onDeleteColor={handleDeleteColor}
                 />
             ))}
+            {colors.length === 0 && <p>No colors... Start by adding one!</p>}
         </>
     );
 }
