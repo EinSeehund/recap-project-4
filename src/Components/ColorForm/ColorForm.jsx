@@ -1,12 +1,12 @@
 import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onSubmit }) {
+export default function ColorForm({ onAddColor }) {
     function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
         const newColor = Object.fromEntries(formData);
-        onSubmit(newColor);
+        onAddColor(newColor);
         event.target.reset();
     }
 

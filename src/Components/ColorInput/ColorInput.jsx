@@ -10,7 +10,7 @@ export default function ColorInput({ id, value, ariaLabel }) {
                 name={id}
                 id={id}
                 value={colorValue}
-                onChange={() => {
+                onChange={(event) => {
                     setColorValue(event.target.value);
                 }}
             />
@@ -18,7 +18,7 @@ export default function ColorInput({ id, value, ariaLabel }) {
                 type="color"
                 aria-label={ariaLabel}
                 value={colorValue}
-                onChange={() => {
+                onChange={(event) => {
                     setColorValue(event.target.value);
                 }}
             />
