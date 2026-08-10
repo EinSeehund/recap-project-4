@@ -2,6 +2,7 @@ import { useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
+import ContrastChecker from "../ContrastChecker/ContrastChecker";
 
 export default function Color({
     id,
@@ -24,6 +25,7 @@ export default function Color({
                 <b>{role}</b>
             </p>
             <p style={contrastStyle}>{`contrast: ${contrastText}`}</p>
+            <ContrastChecker color1={color} color2={contrastText} />
             {!showConfirm && !showEdit && (
                 <button
                     onClick={() => {
