@@ -8,8 +8,9 @@ export default function Color({
     contrastText,
     onDeleteColor,
 }) {
-    const contrastStyle = { color: contrastText };
     const [showConfirm, setShowConfirm] = useState(false);
+
+    const contrastStyle = { color: contrastText };
 
     return (
         <article className="color-card" style={{ backgroundColor: color }}>
