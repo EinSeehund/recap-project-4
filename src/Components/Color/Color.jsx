@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 
 export default function Color({
@@ -7,8 +8,10 @@ export default function Color({
     role,
     contrastText,
     onDeleteColor,
+    onEditColor,
 }) {
     const [showConfirm, setShowConfirm] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
 
     const contrastStyle = { color: contrastText };
 
@@ -19,7 +22,7 @@ export default function Color({
                 <b>{role}</b>
             </p>
             <p style={contrastStyle}>{`contrast: ${contrastText}`}</p>
-            {!showConfirm && (
+            {!showConfirm && !showEdit && (
                 <button
                     onClick={() => {
                         setShowConfirm(true);
@@ -44,6 +47,36 @@ export default function Color({
                         }}
                     >
                         Delete
+                    </button>
+                </>
+            )}
+            {!showEdit && !showConfirm && (
+                <button
+                    onClick={() => {
+                        setShowEdit(true);
+                    }}
+                >
+                    Edit
+                </button>
+            )}
+            {showEdit && (
+                <>
+                    <ColorForm
+                        colorId={id}
+                        colorHex={color}
+                        colorRole={role}
+                        colorContrast={contrastText}
+                        onEditColor={onEditColor}
+                        closeFormOnEdit={() => {
+                            setShowEdit(false);
+                        }}
+                    />
+                    <button
+                        onClick={() => {
+                            setShowEdit(false);
+                        }}
+                    >
+                        Cancel
                     </button>
                 </>
             )}

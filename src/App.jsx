@@ -22,6 +22,14 @@ function App() {
         setColors(colors.filter((color) => color.id !== colorId));
     }
 
+    function handleEditColor(colorId, newColor) {
+        setColors(
+            colors.map((color) =>
+                color.id === colorId ? { id: colorId, ...newColor } : color,
+            ),
+        );
+    }
+
     return (
         <>
             <h1>Theme Creator</h1>
@@ -34,6 +42,7 @@ function App() {
                     role={color.role}
                     contrastText={color.contrastText}
                     onDeleteColor={handleDeleteColor}
+                    onEditColor={handleEditColor}
                 />
             ))}
             {colors.length === 0 && <p>No colors... Start by adding one!</p>}
