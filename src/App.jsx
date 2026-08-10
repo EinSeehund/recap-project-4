@@ -19,7 +19,7 @@ function App() {
     }
 
     function handleDeleteColor(colorId) {
-        setColors(colors.filter((color) => color.id != colorId));
+        setColors(colors.filter((color) => color.id !== colorId));
     }
 
     return (
