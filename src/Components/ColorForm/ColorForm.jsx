@@ -10,11 +10,13 @@ export default function ColorForm({
     onEditColor,
     closeFormOnEdit,
 }) {
+    const isEditing = Boolean(colorId);
+
     function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
         const newColor = Object.fromEntries(formData);
-        if (colorId) {
+        if (isEditing) {
             onEditColor(colorId, newColor);
             closeFormOnEdit();
         } else {
@@ -25,39 +27,47 @@ export default function ColorForm({
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="role" style={colorId && { color: colorContrast }}>
+            <label
+                htmlFor={colorId ? `role-${colorId}` : "role"}
+                style={{ isEditing } && { color: colorContrast }}
+            >
                 Role
             </label>
             <input
                 type="text"
                 name="role"
-                id="role"
-                defaultValue={colorId ? colorRole : "some color"}
+                id={isEditing ? `role-${colorId}` : "role"}
+                defaultValue={isEditing ? colorRole : "some color"}
             />
 
-            <label htmlFor="hex" style={colorId && { color: colorContrast }}>
+            <label
+                htmlFor={isEditing ? `hex-${colorId}` : "hex"}
+                style={{ isEditing } && { color: colorContrast }}
+            >
                 Hex
             </label>
             <ColorInput
-                id="hex"
-                value={colorId ? colorHex : "#663399"}
+                id={isEditing ? `hex-${colorId}` : "hex"}
+                name="hex"
+                value={isEditing ? colorHex : "#663399"}
                 ariaLabel="Pick hex color"
             />
 
             <label
-                htmlFor="contrastText"
-                style={colorId && { color: colorContrast }}
+                htmlFor={isEditing ? `contrastText-${colorId}` : "contrastText"}
+                style={{ isEditing } && { color: colorContrast }}
             >
                 Contrast Text
             </label>
             <ColorInput
-                id="contrastText"
-                value={colorId ? colorContrast : "#ffffff"}
+                id={isEditing ? `contrastText-${colorId}` : "contrastText"}
+                name="contrastText"
+                value={isEditing ? colorContrast : "#ffffff"}
                 ariaLabel="Pick contrast color"
             />
 
             <button type="submit">
-                {colorId ? "UPDATE COLOR" : "ADD COLOR"}
+                {isEditing ? "UPDATE COLOR" : "ADD COLOR"}
             </button>
         </form>
     );

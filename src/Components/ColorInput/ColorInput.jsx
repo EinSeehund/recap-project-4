@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default function ColorInput({ id, value, ariaLabel }) {
+export default function ColorInput({ id, name, value, ariaLabel }) {
     const [colorValue, setColorValue] = useState(value);
 
     return (
         <>
             <input
                 type="text"
-                name={id}
+                name={name}
                 id={id}
                 value={colorValue}
                 onChange={(event) => {
