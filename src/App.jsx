@@ -8,13 +8,20 @@ import { uid } from "uid";
 import ThemeForm from "./Components/ThemeForm/ThemeForm";
 
 function App() {
+    const DEFAULT_THEME_ID = "1";
+
     const [themes, setThemes] = useLocalStorageState("themes", {
         defaultValue: [
-            { id: "1", name: "Default Theme", colors: initialColors },
-            { id: "2", name: "Empty Theme", colors: [] },
+            {
+                id: DEFAULT_THEME_ID,
+                name: "Default Theme",
+                colors: initialColors,
+            },
         ],
     });
     const [currentThemeId, setCurrentThemeId] = useState("1");
+
+    const currentTheme = themes.find((theme) => theme.id === currentThemeId);
 
     function handleAddColor(newColorData) {
         setThemes(
@@ -99,21 +106,20 @@ function App() {
                 currentThemeId={currentThemeId}
             />
             <ColorForm onAddColor={handleAddColor} />
-            {themes
-                .filter((theme) => theme.id === currentThemeId)[0]
-                .colors.map((color) => (
-                    <Color
-                        key={color.id}
-                        id={color.id}
-                        color={color.hex}
-                        role={color.role}
-                        contrastText={color.contrastText}
-                        onDeleteColor={handleDeleteColor}
-                        onEditColor={handleEditColor}
-                    />
-                ))}
-            {themes.filter((theme) => theme.id === currentThemeId)[0].colors
-                .length === 0 && <p>No colors... Start by adding one!</p>}
+            {currentTheme.colors.map((color) => (
+                <Color
+                    key={color.id}
+                    id={color.id}
+                    color={color.hex}
+                    role={color.role}
+                    contrastText={color.contrastText}
+                    onDeleteColor={handleDeleteColor}
+                    onEditColor={handleEditColor}
+                />
+            ))}
+            {currentTheme.colors.length === 0 && (
+                <p>No colors... Start by adding one!</p>
+            )}
         </>
     );
 }

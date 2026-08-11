@@ -40,18 +40,22 @@ export default function ThemeForm({
         <>
             {/* DROPDOWN */}
             {!isAdding && !isEditing && (
-                <select
-                    value={currentThemeId}
-                    onChange={(event) => {
-                        onChangeTheme(event.target.value);
-                    }}
-                >
-                    {themes.map((theme) => (
-                        <option key={theme.id} value={theme.id}>
-                            {theme.name}
-                        </option>
-                    ))}
-                </select>
+                <>
+                    <label htmlFor="themeSelect">Choose Theme:</label>
+                    <select
+                        value={currentThemeId}
+                        onChange={(event) => {
+                            onChangeTheme(event.target.value);
+                        }}
+                        id="themeSelect"
+                    >
+                        {themes.map((theme) => (
+                            <option key={theme.id} value={theme.id}>
+                                {theme.name}
+                            </option>
+                        ))}
+                    </select>
+                </>
             )}
 
             {/* TEXT INPUT */}
@@ -94,9 +98,8 @@ export default function ThemeForm({
                     onClick={() => {
                         setIsEditing(true);
                         setTextInput(
-                            themes.filter(
-                                (theme) => theme.id === currentThemeId,
-                            )[0].name,
+                            themes.find((theme) => theme.id === currentThemeId)
+                                .name,
                         );
                     }}
                     disabled={currentThemeId === "1"}
