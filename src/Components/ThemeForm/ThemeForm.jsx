@@ -7,6 +7,7 @@ export default function ThemeForm({
     onDeleteTheme,
     onEditTheme,
     currentThemeId,
+    defaultThemeId,
 }) {
     const [isAdding, setIsAdding] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
@@ -102,7 +103,7 @@ export default function ThemeForm({
                                 .name,
                         );
                     }}
-                    disabled={currentThemeId === "1"}
+                    disabled={currentThemeId === defaultThemeId}
                 >
                     Edit
                 </button>
@@ -125,7 +126,7 @@ export default function ThemeForm({
             {!isDeleting && !isEditing && !isAdding && (
                 <button
                     onClick={() => setIsDeleting(true)}
-                    disabled={currentThemeId === "1"}
+                    disabled={currentThemeId === defaultThemeId}
                 >
                     Delete
                 </button>

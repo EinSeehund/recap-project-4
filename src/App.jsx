@@ -19,7 +19,7 @@ function App() {
             },
         ],
     });
-    const [currentThemeId, setCurrentThemeId] = useState("1");
+    const [currentThemeId, setCurrentThemeId] = useState(DEFAULT_THEME_ID);
 
     const currentTheme = themes.find((theme) => theme.id === currentThemeId);
 
@@ -83,7 +83,7 @@ function App() {
 
     function handleDeleteTheme(themeId) {
         setThemes(themes.filter((theme) => theme.id !== themeId));
-        setCurrentThemeId("1");
+        setCurrentThemeId(DEFAULT_THEME_ID);
     }
 
     function handleEditTheme(themeId, newName) {
@@ -104,6 +104,7 @@ function App() {
                 onDeleteTheme={handleDeleteTheme}
                 onEditTheme={handleEditTheme}
                 currentThemeId={currentThemeId}
+                defaultThemeId={DEFAULT_THEME_ID}
             />
             <ColorForm onAddColor={handleAddColor} />
             {currentTheme.colors.map((color) => (
