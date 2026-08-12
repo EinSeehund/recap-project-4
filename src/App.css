@@ -1,4 +1,43 @@
 body {
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  padding: 10px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgb(195, 195, 195);
+  padding: 30px 0;
+}
+
+main {
+    margin-top: 20px;
+    margin-bottom: 200px;
+    min-width: 800px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    height: 2rem;
+    padding: 0 12px;
+    background-color: rgb(88, 88, 88);
+    color: white;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 3px 3px 4px -3px rgba(0, 0, 0, 0.25);
+}
+
+button:disabled {
+  background-color: lightgray;
+}
+
+h1 > span {
+  display: block;
+  line-height: 33px;
+  text-transform: uppercase;
 }

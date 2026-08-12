@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ThemeForm.css";
 
 export default function ThemeForm({
     themes,
@@ -38,11 +39,11 @@ export default function ThemeForm({
     }
 
     return (
-        <>
+        <div className="theme-form">
             {/* DROPDOWN */}
             {!isAdding && !isEditing && (
-                <>
-                    <label htmlFor="themeSelect">Choose Theme:</label>
+                <div className="theme-selector">
+                    <label htmlFor="themeSelect">Choose Theme</label>
                     <select
                         value={currentThemeId}
                         onChange={(event) => {
@@ -56,13 +57,13 @@ export default function ThemeForm({
                             </option>
                         ))}
                     </select>
-                </>
+                </div>
             )}
 
             {/* TEXT INPUT */}
             {(isEditing || isAdding) && (
                 <>
-                    <label htmlFor="themeName">Theme Name:</label>
+                    <label htmlFor="themeName">Theme Name</label>
                     <input
                         type="text"
                         id="themeName"
@@ -71,72 +72,76 @@ export default function ThemeForm({
                     />
                 </>
             )}
-
-            {/* ADD */}
-            {!isDeleting && !isEditing && (
-                <button
-                    onClick={() =>
-                        isAdding ? addNewTheme() : setIsAdding(true)
-                    }
-                >
-                    Add
-                </button>
-            )}
-            {isAdding && (
-                <button
-                    onClick={() => {
-                        setIsAdding(false);
-                        setTextInput("");
-                    }}
-                >
-                    Cancel
-                </button>
-            )}
-
-            {/* EDIT */}
-            {!isDeleting && !isEditing && !isAdding && (
-                <button
-                    onClick={() => {
-                        setIsEditing(true);
-                        setTextInput(
-                            themes.find((theme) => theme.id === currentThemeId)
-                                .name,
-                        );
-                    }}
-                    disabled={currentThemeId === defaultThemeId}
-                >
-                    Edit
-                </button>
-            )}
-            {isEditing && (
-                <>
-                    <button onClick={editTheme}>Update</button>
+            <div className="theme-form-buttons">
+                {/* ADD */}
+                {!isDeleting && !isEditing && (
+                    <button
+                        onClick={() =>
+                            isAdding ? addNewTheme() : setIsAdding(true)
+                        }
+                    >
+                        Add
+                    </button>
+                )}
+                {isAdding && (
                     <button
                         onClick={() => {
-                            setIsEditing(false);
+                            setIsAdding(false);
                             setTextInput("");
                         }}
                     >
                         Cancel
                     </button>
-                </>
-            )}
+                )}
 
-            {/* DELETE */}
-            {!isDeleting && !isEditing && !isAdding && (
-                <button
-                    onClick={() => setIsDeleting(true)}
-                    disabled={currentThemeId === defaultThemeId}
-                >
-                    Delete
-                </button>
-            )}
-            {isDeleting && (
-                <>
-                    <button onClick={deleteTheme}>Yes, Delete!</button>
-                    <button onClick={() => setIsDeleting(false)}>Cancel</button>
-                </>
-            )}
-        </>
+                {/* EDIT */}
+                {!isDeleting && !isEditing && !isAdding && (
+                    <button
+                        onClick={() => {
+                            setIsEditing(true);
+                            setTextInput(
+                                themes.find(
+                                    (theme) => theme.id === currentThemeId,
+                                ).name,
+                            );
+                        }}
+                        disabled={currentThemeId === defaultThemeId}
+                    >
+                        Edit
+                    </button>
+                )}
+                {isEditing && (
+                    <>
+                        <button onClick={editTheme}>Update</button>
+                        <button
+                            onClick={() => {
+                                setIsEditing(false);
+                                setTextInput("");
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </>
+                )}
+
+                {/* DELETE */}
+                {!isDeleting && !isEditing && !isAdding && (
+                    <button
+                        onClick={() => setIsDeleting(true)}
+                        disabled={currentThemeId === defaultThemeId}
+                    >
+                        Delete
+                    </button>
+                )}
+                {isDeleting && (
+                    <>
+                        <button onClick={deleteTheme}>Yes, Delete!</button>
+                        <button onClick={() => setIsDeleting(false)}>
+                            Cancel
+                        </button>
+                    </>
+                )}
+            </div>
+        </div>
     );
 }

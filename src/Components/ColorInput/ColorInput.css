@@ -1,0 +1,25 @@
+input {
+    height: 2rem;
+    border: none;
+    background-color: rgb(240, 240, 240);
+}
+
+.hex-input {
+    max-width: 90px;
+}
+
+.text-input {
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+.color-input {
+    height: 2rem;
+    width: 2rem;
+    
+    border-radius: 0 10px 10px 0;
+}
+
+.color-inputs {
+    display: flex;
+}

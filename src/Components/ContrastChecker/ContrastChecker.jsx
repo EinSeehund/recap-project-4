@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./ContrastChecker.css";
 
 export default function ContrastChecker({ color1, color2 }) {
     const [contrastEvaluation, setContrastEvaluation] = useState("pending...");
@@ -18,16 +19,19 @@ export default function ContrastChecker({ color1, color2 }) {
                     },
                 );
                 const data = await response.json();
-                setContrastEvaluation(data.overall);
+                
                 switch (data.overall) {
                     case "Yup":
-                        setBgColor("lightgreen");
+                        setBgColor("green");
+                        setContrastEvaluation("✔");
                         break;
                     case "Kinda":
-                        setBgColor("yellow");
+                        setBgColor("orange");
+                        setContrastEvaluation("~");
                         break;
                     case "Nope":
-                        setBgColor("#ff3d3d");
+                        setBgColor("red");
+                        setContrastEvaluation("✘");
                         break;
                     default:
                         setBgColor("lightgray");
@@ -40,8 +44,11 @@ export default function ContrastChecker({ color1, color2 }) {
     }, [color1, color2]);
 
     return (
-        <p style={{ backgroundColor: bgColor }}>
-            Overall Contrast Score: {contrastEvaluation}
-        </p>
+        <div className="contrast-checker">
+            <p style={{ color: color2 }}>Overall Contrast Score: </p>
+            <span style={{ backgroundColor: bgColor }}>
+                {contrastEvaluation}
+            </span>
+        </div>
     );
 }

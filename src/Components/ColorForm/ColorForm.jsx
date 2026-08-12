@@ -27,44 +27,53 @@ export default function ColorForm({
 
     return (
         <form onSubmit={handleSubmit}>
-            <label
-                htmlFor={colorId ? `role-${colorId}` : "role"}
-                style={{ isEditing } && { color: colorContrast }}
-            >
-                Role
-            </label>
-            <input
-                type="text"
-                name="role"
-                id={isEditing ? `role-${colorId}` : "role"}
-                defaultValue={isEditing ? colorRole : "some color"}
-            />
+            <div>
+                <label
+                    htmlFor={colorId ? `role-${colorId}` : "role"}
+                    style={{ isEditing } && { color: colorContrast }}
+                >
+                    Role
+                </label>
+                <input
+                    className="role-input"
+                    type="text"
+                    name="role"
+                    id={isEditing ? `role-${colorId}` : "role"}
+                    defaultValue={isEditing ? colorRole : "rebecca purple"}
+                />
+            </div>
 
-            <label
-                htmlFor={isEditing ? `hex-${colorId}` : "hex"}
-                style={{ isEditing } && { color: colorContrast }}
-            >
-                Hex
-            </label>
-            <ColorInput
-                id={isEditing ? `hex-${colorId}` : "hex"}
-                name="hex"
-                value={isEditing ? colorHex : "#663399"}
-                ariaLabel="Pick hex color"
-            />
+            <div>
+                <label
+                    htmlFor={isEditing ? `hex-${colorId}` : "hex"}
+                    style={{ isEditing } && { color: colorContrast }}
+                >
+                    Hex
+                </label>
+                <ColorInput
+                    id={isEditing ? `hex-${colorId}` : "hex"}
+                    name="hex"
+                    value={isEditing ? colorHex : "#663399"}
+                    ariaLabel="Pick hex color"
+                />
+            </div>
 
-            <label
-                htmlFor={isEditing ? `contrastText-${colorId}` : "contrastText"}
-                style={{ isEditing } && { color: colorContrast }}
-            >
-                Contrast Text
-            </label>
-            <ColorInput
-                id={isEditing ? `contrastText-${colorId}` : "contrastText"}
-                name="contrastText"
-                value={isEditing ? colorContrast : "#ffffff"}
-                ariaLabel="Pick contrast color"
-            />
+            <div>
+                <label
+                    htmlFor={
+                        isEditing ? `contrastText-${colorId}` : "contrastText"
+                    }
+                    style={{ isEditing } && { color: colorContrast }}
+                >
+                    Contrast
+                </label>
+                <ColorInput
+                    id={isEditing ? `contrastText-${colorId}` : "contrastText"}
+                    name="contrastText"
+                    value={isEditing ? colorContrast : "#ffffff"}
+                    ariaLabel="Pick contrast color"
+                />
+            </div>
 
             <button type="submit">
                 {isEditing ? "UPDATE COLOR" : "ADD COLOR"}

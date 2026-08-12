@@ -19,71 +19,81 @@ export default function Color({
 
     return (
         <article className="color-card" style={{ backgroundColor: color }}>
-            <h2 className="color-card-highlight">{color}</h2>
-            <CopyToClipboard color={color} />
-            <p style={contrastStyle}>
-                <b>{role}</b>
-            </p>
-            <p style={contrastStyle}>{`contrast: ${contrastText}`}</p>
-            <ContrastChecker color1={color} color2={contrastText} />
-            {!showConfirm && !showEdit && (
-                <button
-                    onClick={() => {
-                        setShowConfirm(true);
-                    }}
-                >
-                    Delete
-                </button>
-            )}
-            {showConfirm && (
-                <>
-                    <p className="color-card-highlight">Really delete?</p>
-                    <button
-                        onClick={() => {
-                            setShowConfirm(false);
-                        }}
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        onClick={() => {
-                            onDeleteColor(id);
-                        }}
-                    >
-                        Delete
-                    </button>
-                </>
-            )}
-            {!showEdit && !showConfirm && (
-                <button
-                    onClick={() => {
-                        setShowEdit(true);
-                    }}
-                >
-                    Edit
-                </button>
-            )}
-            {showEdit && (
-                <>
-                    <ColorForm
-                        colorId={id}
-                        colorHex={color}
-                        colorRole={role}
-                        colorContrast={contrastText}
-                        onEditColor={onEditColor}
-                        closeFormOnEdit={() => {
-                            setShowEdit(false);
-                        }}
-                    />
-                    <button
-                        onClick={() => {
-                            setShowEdit(false);
-                        }}
-                    >
-                        Cancel
-                    </button>
-                </>
-            )}
+            <div className="color-control">
+                <div className="color-infos">
+                    <p style={contrastStyle} className="color-role">
+                        <b>{role}</b>
+                    </p>
+                    <p style={contrastStyle}>{`contrast: ${contrastText}`}</p>
+                    <ContrastChecker color1={color} color2={contrastText} />
+                </div>
+                <div>
+                    {!showConfirm && !showEdit && (
+                        <button
+                            onClick={() => {
+                                setShowConfirm(true);
+                            }}
+                        >
+                            Delete
+                        </button>
+                    )}
+                    {showConfirm && (
+                        <>
+                            <p style={contrastStyle}>
+                                Really delete?
+                            </p>
+                            <button
+                                onClick={() => {
+                                    setShowConfirm(false);
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={() => {
+                                    onDeleteColor(id);
+                                }}
+                            >
+                                Delete
+                            </button>
+                        </>
+                    )}
+                    {!showEdit && !showConfirm && (
+                        <button
+                            onClick={() => {
+                                setShowEdit(true);
+                            }}
+                        >
+                            Edit
+                        </button>
+                    )}
+                    {showEdit && (
+                        <>
+                            <ColorForm
+                                colorId={id}
+                                colorHex={color}
+                                colorRole={role}
+                                colorContrast={contrastText}
+                                onEditColor={onEditColor}
+                                closeFormOnEdit={() => {
+                                    setShowEdit(false);
+                                }}
+                            />
+                            <button
+                                onClick={() => {
+                                    setShowEdit(false);
+                                }}
+                            >
+                                Cancel
+                            </button>
+                        </>
+                    )}
+                </div>
+            </div>
+            <div className="code-n-copy">
+                <h2 className="color-card-highlight">{color}</h2>
+                <CopyToClipboard color={color} />
+            </div>
         </article>
     );
 }
