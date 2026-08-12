@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import './CopyToClipboard.css'
 
 export default function CopyToClipboard({ color }) {
     const [showCopied, setShowCopied] = useState(false);

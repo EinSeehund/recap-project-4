@@ -96,31 +96,42 @@ function App() {
 
     return (
         <>
-            <h1>Theme Creator</h1>
-            <ThemeForm
-                themes={themes}
-                onChangeTheme={handleChangeTheme}
-                onAddTheme={handleAddTheme}
-                onDeleteTheme={handleDeleteTheme}
-                onEditTheme={handleEditTheme}
-                currentThemeId={currentThemeId}
-                defaultThemeId={DEFAULT_THEME_ID}
-            />
-            <ColorForm onAddColor={handleAddColor} />
-            {currentTheme.colors.map((color) => (
-                <Color
-                    key={color.id}
-                    id={color.id}
-                    color={color.hex}
-                    role={color.role}
-                    contrastText={color.contrastText}
-                    onDeleteColor={handleDeleteColor}
-                    onEditColor={handleEditColor}
-                />
-            ))}
-            {currentTheme.colors.length === 0 && (
-                <p>No colors... Start by adding one!</p>
-            )}
+            <header>
+                <h1>
+                    <span style={{ color: "red" }}>Color</span>
+                    <span style={{ color: "green" }}>Theme</span>
+                    <span style={{ color: "blue" }}>Creator</span>
+                </h1>
+                
+                    <ThemeForm
+                        themes={themes}
+                        onChangeTheme={handleChangeTheme}
+                        onAddTheme={handleAddTheme}
+                        onDeleteTheme={handleDeleteTheme}
+                        onEditTheme={handleEditTheme}
+                        currentThemeId={currentThemeId}
+                        defaultThemeId={DEFAULT_THEME_ID}
+                    />
+                
+            </header>
+
+            <main>
+                <ColorForm onAddColor={handleAddColor} />
+                {currentTheme.colors.map((color) => (
+                    <Color
+                        key={color.id}
+                        id={color.id}
+                        color={color.hex}
+                        role={color.role}
+                        contrastText={color.contrastText}
+                        onDeleteColor={handleDeleteColor}
+                        onEditColor={handleEditColor}
+                    />
+                ))}
+                {currentTheme.colors.length === 0 && (
+                    <p>No colors... Start by adding one!</p>
+                )}
+            </main>
         </>
     );
 }
